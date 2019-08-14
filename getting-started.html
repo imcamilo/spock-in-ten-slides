@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Spock in ten slides</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+  </head>
+  <body>
+    <textarea id="source">
+
+class: middle, center
+## Spock
+"The enterprise ready specification framework"
+https://github.com/spockframework/spock/
+
+---
+
+class: middle, left
+## Spock - JUnit
+```
+| Spock               | Junit                              |
+|---------------------|------------------------------------|
+| Specification       | Test Class                         |
+| setup()             | @Before                            |
+| cleanup()           | @After                             |
+| setupSpec()         | @BeforeClass                       |
+| cleanupSpec()       | @AfterClass                        |
+| Feature             | Test                               |
+| Feature method      | Test method                        |
+| Data-driven feature | Theory                             |
+| Condition           | Assertion                          |
+| Exception condition | @Test(expected=…)                  |
+| Interaction         | Mock expectation (e.g. in Mockito) |
+```
+
+---
+
+class: middle, left
+## Specification
+Una especificación se presenta como una clase que hereda de `spock.lang.Specification`
+```groovy
+class MyFirstSpecification extends Specification {
+  // fields
+  // fixture methods
+  // feature methods
+  // helper methods
+}
+```
+
+---
+
+class: middle, left
+## Fixtures
+```groovy
+def setup() {}          // run before every feature method
+def cleanup() {}        // run after every feature method
+def setupSpec() {}      // run before the first feature method
+def cleanupSpec() {}    // run after the last feature method
+```
+
+---
+
+class: middle, left
+## Feature Methods
+- Son el corazón de una especificación
+- Describen las características que se esperan encontrar
+```groovy
+def "pushing an element on the stack"() {
+  // blocks go here
+}
+```
+
+---
+
+class: middle, left
+## Blocks
+Los métodos de características se estructuran con bloques
+![Blocks to Phases](resources/Blocks2Phases.png)
+
+---
+
+class: middle, left
+## Mocking/Stubbing
+JUnit
+```java
+@RunWith(MockitoJUnitRunner.class)
+...
+private Subscriber subscriber = mock(Subscriber.class);
+...
+when(subscriber.someMethod(TEST)).thenReturn(result);
+verify(subscriber).otherMethod(isA(Some.class));
+```
+Spock
+```groovy
+def subscriber = Mock(Subscriber)
+...
+subscriber.someMethod(TEST) >> result
+1 * subscriber.otherMethod
+```
+
+---
+
+class: middle, left
+## Data Driven Testing
+
+---
+
+class: middle, left
+## Learning xx
+
+---
+
+class: middle, left
+## Learning sss
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>

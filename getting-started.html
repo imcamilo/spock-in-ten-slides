@@ -76,6 +76,7 @@ def "pushing an element on the stack"() {
 class: middle, left
 ## Blocks
 Los métodos de características se estructuran con bloques
+
 ![Blocks to Phases](resources/Blocks2Phases.png)
 
 ---
@@ -100,19 +101,68 @@ subscriber.someMethod(TEST) >> result
 ```
 
 ---
-
 class: middle, left
-## Data Driven Testing
+
+## Parameterization
+
+```groovy
+class ImageValidatorSpec extends Specification {
+
+    @Unroll
+    def "validate extension of #fileToValidate"() {
+      when: "validator checks filename"
+          def isValid = validate fileToValidate
+      then: "return appropriate result"
+          isValid == expectedResult
+      where: "input files are"
+          fileToValidate || expectedResult
+          'some.jpeg'    || true
+          'some.jpg'     || true
+          'some.tiff'    || false
+          'some.bmp'     || true
+          'some.png'     || false
+    }
+
+}
+```
 
 ---
 
 class: middle, left
-## Learning xx
+## Specifications as Documentation
+
+```groovy
+class AlbumServiceSpec extends Specification {
+
+    AlbumServiceImp service
+    AlbumMapper mapper = Stub(AlbumMapper)
+
+    void setup() {
+        service = new AlbumServiceImp(mapper)
+    }
+
+    void "It should return dto list when the find is correct"() {
+        given: "stubbing service"
+            Integer userId = 3
+            List<Album> dataSearch = []
+            mapper.findAllByUserId(_ as Long) >> dataSearch
+        when: "store service response"
+            def findInformation = service.findAllByUserId(userId)
+        then: "assertions"
+            findInformation instanceof List<AlbumDTO>
+    }
+
+}
+```
 
 ---
 
 class: middle, left
-## Learning sss
+## +
+
+* Helper Methods
+* Extensions
+* Data Driven Testing
 
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js" type="text/javascript">

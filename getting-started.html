@@ -38,7 +38,9 @@ class: middle, left
 
 class: middle, left
 ## Specification
-Una especificación se presenta como una clase que hereda de `spock.lang.Specification`
+
+A specification is represented as a Groovy class that extends from `spock.lang.Specification`
+
 ```groovy
 class MyFirstSpecification extends Specification {
   // fields
@@ -63,8 +65,12 @@ def cleanupSpec() {}    // run after the last feature method
 
 class: middle, left
 ## Feature Methods
-- Son el corazón de una especificación
-- Describen las características que se esperan encontrar
+
+* Set up the feature’s fixture
+* Provide a stimulus to the system under specification
+* Describe the response expected from the system
+* Clean up the feature’s fixture
+
 ```groovy
 def "pushing an element on the stack"() {
   // blocks go here
@@ -75,7 +81,8 @@ def "pushing an element on the stack"() {
 
 class: middle, left
 ## Blocks
-Los métodos de características se estructuran con bloques
+
+There are six kinds of blocks: `setup`, `when`, `then`, `expect`, `cleanup`, and `where` blocks.
 
 ![Blocks to Phases](resources/Blocks2Phases.png)
 

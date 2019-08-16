@@ -87,6 +87,32 @@ There are six kinds of blocks: `setup`, `when`, `then`, `expect`, `cleanup`, and
 ![Blocks to Phases](resources/Blocks2Phases.png)
 
 ---
+### Feedback
+
+```groovy
+setup:
+  def stack = new Stack()
+  def elem = "push me"
+when:
+  stack.push(elem)
+then:
+  !stack.empty
+  stack.size() == 1
+  stack.peek() == elem
+```
+
+What kind of feedback does Spock provide if a condition is violated? (`stack.size() == 2`)
+
+```groovy
+Condition not satisfied:
+
+stack.size() == 2
+|     |      |
+|     1      false
+[push me]
+```
+
+---
 
 class: middle, left
 ## Mocking/Stubbing
@@ -161,16 +187,6 @@ class AlbumServiceSpec extends Specification {
 
 }
 ```
-
----
-
-class: middle, left
-## +
-
-* Helper Methods
-* Extensions
-* Data Driven Testing
-
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js" type="text/javascript">
     </script>

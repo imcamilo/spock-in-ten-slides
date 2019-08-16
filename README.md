@@ -16,4 +16,4 @@ This project is inspired by [Rust in ten slides](https://github.com/steveklabnik
 
 ## License
 
-Everything is licensed under MIT/Apache2, just like Rust.
+Everything is licensed under MIT/Apache2
